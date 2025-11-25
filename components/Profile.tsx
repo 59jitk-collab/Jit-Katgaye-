@@ -1,6 +1,6 @@
 import React from 'react';
 import { UserPreferences } from '../types';
-import { LogOut, User, Target, Award, Settings, Bell, Shield, ChevronRight, ChevronLeft } from 'lucide-react';
+import { LogOut, User, Target, Award, Settings, Bell, Shield, ChevronRight, ChevronLeft, BookOpen, PenTool, School } from 'lucide-react';
 
 interface ProfileProps {
   user: UserPreferences;
@@ -9,112 +9,112 @@ interface ProfileProps {
 }
 
 const Profile: React.FC<ProfileProps> = ({ user, onLogout, onBack }) => {
+  const subjects = [
+      { name: 'Mathematics', score: 85, color: 'bg-blue-500' },
+      { name: 'Science', score: 92, color: 'bg-emerald-500' },
+      { name: 'Social Science', score: 78, color: 'bg-orange-500' },
+      { name: 'English', score: 88, color: 'bg-purple-500' }
+  ];
+
   return (
-    <div className="pb-32 pt-6 px-6 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 bg-slate-50 min-h-full">
-      {/* Header with Back Button */}
-      <div className="flex items-center mb-4">
-        <button onClick={onBack} className="p-2 -ml-2 hover:bg-slate-200 rounded-full transition-colors text-slate-500">
-            <ChevronLeft size={24} />
-        </button>
-      </div>
+    <div className="h-full flex flex-col bg-slate-50 overflow-y-auto no-scrollbar pb-24">
+      {/* Professional Header - ID Card Style */}
+      <div className="bg-slate-900 text-white p-6 pt-10 rounded-b-[2.5rem] relative shadow-xl shadow-slate-200">
+         <div className="flex items-center justify-between mb-8">
+            <button onClick={onBack} className="p-2 -ml-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors">
+                <ChevronLeft size={24} />
+            </button>
+            <span className="text-xs font-bold tracking-[0.2em] uppercase text-slate-400">Student Profile</span>
+            <button className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors">
+                <Settings size={20} />
+            </button>
+         </div>
 
-      {/* User Info */}
-      <div className="flex flex-col items-center -mt-4">
-        <div className="w-32 h-32 rounded-full border-4 border-white shadow-2xl shadow-slate-200 overflow-hidden mb-6 relative bg-slate-100 ring-4 ring-slate-50">
-           {user.avatar ? (
-            <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" />
-           ) : (
-             <div className="w-full h-full flex items-center justify-center text-slate-300">
-               <User size={56} />
-             </div>
-           )}
-        </div>
-        <h1 className="text-2xl font-bold text-slate-900 tracking-tight">{user.name || 'Guest User'}</h1>
-        <p className="text-slate-500 text-sm font-medium mt-1">{user.email || 'No linked account'}</p>
-      </div>
-
-      {/* Stats Overview */}
-      <div className="grid grid-cols-2 gap-4">
-        <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex flex-col items-center text-center group transition-transform hover:-translate-y-1">
-           <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-3 group-hover:bg-blue-100 transition-colors">
-             <Award size={24} />
-           </div>
-           <span className="text-3xl font-bold text-slate-800 tracking-tight">3</span>
-           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-1">Current Level</span>
-        </div>
-        <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex flex-col items-center text-center group transition-transform hover:-translate-y-1">
-           <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-3 group-hover:bg-emerald-100 transition-colors">
-             <Target size={24} />
-           </div>
-           <span className="text-3xl font-bold text-slate-800 tracking-tight">85%</span>
-           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-1">Consistency</span>
-        </div>
-      </div>
-
-      {/* Sections */}
-      <div className="space-y-8">
-        <div>
-          <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 px-2">Focus & Goals</h3>
-          <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
-             <div className="flex items-start gap-4">
-                <div className="p-2 bg-primary-50 text-primary-600 rounded-xl mt-1 shrink-0">
-                    <Target size={20} />
+         <div className="flex items-center gap-6 pb-6">
+            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary-400 to-primary-600 p-0.5 shadow-lg">
+                <div className="w-full h-full bg-slate-800 rounded-2xl overflow-hidden relative">
+                    {user.avatar ? (
+                        <img src={user.avatar} alt="Profile" className="w-full h-full object-cover" />
+                    ) : (
+                        <div className="w-full h-full flex items-center justify-center text-slate-400">
+                            <User size={32} />
+                        </div>
+                    )}
                 </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 text-sm mb-1">Current Objective</h4>
-                  <p className="text-slate-600 text-sm leading-relaxed">"{user.goal}"</p>
+            </div>
+            <div>
+                <h1 className="text-2xl font-bold tracking-tight">{user.name || 'Guest Student'}</h1>
+                <div className="flex items-center gap-2 mt-1 opacity-80">
+                    <School size={14} />
+                    <span className="text-xs font-bold uppercase tracking-wider">Class 10 • CBSE</span>
                 </div>
+                <div className="mt-3 flex gap-2">
+                    <span className="px-2 py-1 bg-white/10 rounded text-[10px] font-bold border border-white/10">Roll: 240510</span>
+                    <span className="px-2 py-1 bg-emerald-500/20 text-emerald-400 rounded text-[10px] font-bold border border-emerald-500/20">Active</span>
+                </div>
+            </div>
+         </div>
+      </div>
+
+      <div className="px-6 -mt-8">
+          {/* Main Stats Card */}
+          <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex justify-between items-center mb-6">
+              <div className="text-center flex-1 border-r border-slate-100">
+                  <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-1">Rank</p>
+                  <p className="text-2xl font-bold text-slate-800">#42</p>
+              </div>
+              <div className="text-center flex-1 border-r border-slate-100">
+                  <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-1">XP</p>
+                  <p className="text-2xl font-bold text-slate-800">2.4k</p>
+              </div>
+              <div className="text-center flex-1">
+                  <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-1">Accuracy</p>
+                  <p className="text-2xl font-bold text-slate-800">88%</p>
+              </div>
+          </div>
+
+          {/* Subject Performance */}
+          <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 px-1">Subject Performance</h3>
+          <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 space-y-5 mb-8">
+              {subjects.map((sub) => (
+                  <div key={sub.name}>
+                      <div className="flex justify-between items-end mb-2">
+                          <span className="text-sm font-bold text-slate-700">{sub.name}</span>
+                          <span className="text-xs font-bold text-slate-900">{sub.score}%</span>
+                      </div>
+                      <div className="h-2 w-full bg-slate-50 rounded-full overflow-hidden">
+                          <div className={`h-full ${sub.color} rounded-full`} style={{ width: `${sub.score}%` }}></div>
+                      </div>
+                  </div>
+              ))}
+          </div>
+
+          {/* Target Goal */}
+          <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 px-1">Board Exam Goal</h3>
+          <div className="bg-gradient-to-r from-slate-900 to-slate-800 p-6 rounded-3xl shadow-lg text-white mb-8 relative overflow-hidden">
+             <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-10 -mt-10 blur-2xl"></div>
+             <div className="flex items-start gap-4 relative z-10">
+                 <div className="bg-white/10 p-3 rounded-xl">
+                     <Target size={24} className="text-white" />
+                 </div>
+                 <div>
+                     <p className="text-xs text-slate-400 font-bold uppercase tracking-wide mb-1">Target Statement</p>
+                     <p className="font-medium text-sm leading-relaxed opacity-90">"{user.goal}"</p>
+                 </div>
              </div>
           </div>
-        </div>
-
-        <div>
-          <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 px-2">Preferences</h3>
-          <div className="bg-white rounded-3xl shadow-sm border border-slate-100 divide-y divide-slate-50 overflow-hidden">
-            <button className="w-full flex items-center justify-between p-5 hover:bg-slate-50 transition-colors group">
-              <div className="flex items-center gap-4">
-                <div className="p-2 bg-slate-50 rounded-xl text-slate-500 group-hover:text-primary-600 group-hover:bg-primary-50 transition-colors">
-                  <Bell size={20} />
-                </div>
-                <span className="text-slate-700 font-bold text-sm">Notifications</span>
-              </div>
-              <div className="flex items-center gap-2">
-                 <span className="text-xs text-slate-400 font-medium">On</span>
-                 <ChevronRight size={16} className="text-slate-300" />
-              </div>
-            </button>
-            <button className="w-full flex items-center justify-between p-5 hover:bg-slate-50 transition-colors group">
-              <div className="flex items-center gap-4">
-                <div className="p-2 bg-slate-50 rounded-xl text-slate-500 group-hover:text-primary-600 group-hover:bg-primary-50 transition-colors">
-                   <Shield size={20} />
-                </div>
-                <span className="text-slate-700 font-bold text-sm">Privacy & Security</span>
-              </div>
-              <ChevronRight size={16} className="text-slate-300" />
-            </button>
-            <button className="w-full flex items-center justify-between p-5 hover:bg-slate-50 transition-colors group">
-              <div className="flex items-center gap-4">
-                <div className="p-2 bg-slate-50 rounded-xl text-slate-500 group-hover:text-primary-600 group-hover:bg-primary-50 transition-colors">
-                  <Settings size={20} />
-                </div>
-                <span className="text-slate-700 font-bold text-sm">General Settings</span>
-              </div>
-               <ChevronRight size={16} className="text-slate-300" />
-            </button>
+          
+          <button 
+            onClick={onLogout}
+            className="w-full bg-white border-2 border-slate-100 text-slate-500 font-bold py-4 rounded-2xl flex items-center justify-center gap-2 hover:bg-red-50 hover:text-red-600 hover:border-red-100 transition-all duration-200"
+          >
+            <LogOut size={18} />
+            Sign Out
+          </button>
+          
+          <div className="text-center pt-8 pb-4">
+             <p className="text-[10px] text-slate-300 font-bold uppercase tracking-widest">Isus • Class 10 Edition</p>
           </div>
-        </div>
-      </div>
-
-      <button 
-        onClick={onLogout}
-        className="w-full bg-white border border-slate-200 text-slate-600 font-bold py-4 rounded-2xl flex items-center justify-center gap-2 hover:bg-red-50 hover:text-red-600 hover:border-red-100 transition-all duration-200 mb-8"
-      >
-        <LogOut size={18} />
-        Log Out
-      </button>
-      
-      <div className="text-center pb-8">
-        <p className="text-[10px] text-slate-300 font-bold uppercase tracking-widest">Isus v1.2.0 • Powered by Gemini</p>
       </div>
     </div>
   );

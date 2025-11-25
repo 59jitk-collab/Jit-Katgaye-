@@ -10,7 +10,16 @@ export enum AppScreen {
   PROFILE = 'PROFILE',
   PROGRESS = 'PROGRESS',
   STUDY_PLANNER = 'STUDY_PLANNER',
-  FEATURES = 'FEATURES'
+  FEATURES = 'FEATURES',
+  REVISION_NOTES = 'REVISION_NOTES',
+  DOUBT_SOLVER = 'DOUBT_SOLVER',
+  NCERT_ACTIVITIES = 'NCERT_ACTIVITIES',
+  // Sidebar Screens
+  STUDY_TIMER = 'STUDY_TIMER',
+  MY_COURSES = 'MY_COURSES',
+  SYLLABUS = 'SYLLABUS',
+  CALENDAR = 'CALENDAR',
+  STATISTICS = 'STATISTICS'
 }
 
 export enum QuestionType {
@@ -26,7 +35,12 @@ export interface Question {
   correctAnswer: string | number;
   explanation: string;
   subject: string;
+  chapter?: string; // Added chapter support
   year: number;
+  isPYQ?: boolean;
+  isSQP?: boolean;
+  difficulty?: 'Easy' | 'Medium' | 'Hard';
+  tags?: string[];
 }
 
 export interface Flashcard {
@@ -46,6 +60,25 @@ export interface Note {
   reminder?: string; // ISO Date string
 }
 
+export interface ChapterNote {
+  id: string;
+  subject: string;
+  chapterName: string;
+  content: string; // Markdown supported
+  readTime?: string;
+}
+
+export interface Activity {
+  id: string;
+  subject: string;
+  chapter: string;
+  title: string;
+  aim: string;
+  materials: string[];
+  procedure: string[];
+  conclusion: string;
+}
+
 export interface StudyTask {
   id: string;
   text: string;
@@ -63,9 +96,28 @@ export interface UserPreferences {
   goal: string;
 }
 
+export interface UserStats {
+    questionsSolved: number;
+    accuracy: number;
+    streak: number;
+    subjectStats: SubjectStat[];
+}
+
+export interface SubjectStat {
+    name: string;
+    correct: number;
+    total: number;
+}
+
 export interface ChatMessage {
   id: string;
   text: string;
   sender: 'user' | 'ai';
   timestamp: number;
+}
+
+export interface StudyHubFilter {
+    subject?: string;
+    chapter?: string;
+    type?: 'PYQ' | 'MCQ' | 'NOTES'; 
 }
