@@ -1,11 +1,8 @@
 import { GoogleGenAI, Chat } from "@google/genai";
 import { StudyTask } from '../types';
 
-// Declare process for TypeScript to ensure it knows about it during build
-declare const process: { env: { API_KEY?: string } };
-
 // Initialize Gemini API
-// Note: process.env.API_KEY is assumed to be available in the environment via Vite replacement
+// Note: process.env.API_KEY is replaced by the actual key string during build by Vite
 const apiKey = process.env.API_KEY || ''; 
 
 let ai: GoogleGenAI | null = null;

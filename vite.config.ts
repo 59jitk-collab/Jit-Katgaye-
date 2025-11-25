@@ -10,8 +10,10 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     define: {
-      // This ensures process.env.API_KEY works in your code after build
+      // Inject API Key specifically - Vite replaces this string during build
       'process.env.API_KEY': JSON.stringify(env.API_KEY),
+      // Define process.env to empty object to prevent "process is not defined" crashes in browser
+      'process.env': {} 
     },
     build: {
       outDir: 'dist',
