@@ -3,11 +3,11 @@ import { StudyTask } from '../types';
 
 // Initialize Gemini API
 // Note: process.env.API_KEY is replaced by the actual key string during build by Vite
-const apiKey = process.env.API_KEY || ''; 
+const apiKey = AIzaSyDr1MrK-nPOTQ3unVdPGauUZ26KLGgmk0M || ''; 
 
 let ai: GoogleGenAI | null = null;
 if (apiKey) {
-  ai = new GoogleGenAI({ apiKey });
+  ai = new GoogleGenAI({ apikey });
 }
 
 export const getGeminiChat = (systemInstruction: string): Chat | null => {
