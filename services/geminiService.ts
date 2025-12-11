@@ -21,6 +21,44 @@ export const getGeminiChat = (systemInstruction: string): Chat | null => {
   });
 };
 
+export const solveDoubt = async (query: string, imageBase64?: string): Promise<string> => {
+    if (!ai) return "## AI Unavailable\nPlease check your internet connection or try again later.";
+
+    try {
+        const model = 'gemini-2.5-flash';
+        let contents;
+
+        // Clean base64 string if it contains the data URL prefix
+        const cleanBase64 = imageBase64 ? imageBase64.replace(/^data:image\/(png|jpeg|jpg);base64,/, '') : null;
+
+        if (cleanBase64) {
+             contents = {
+                parts: [
+                    { inlineData: { mimeType: 'image/jpeg', data: cleanBase64 } },
+                    { text: query || "Analyze this image and solve the problem shown. Provide a step-by-step explanation suitable for a Class 10 student." }
+                ]
+             };
+        } else {
+            contents = {
+                parts: [{ text: query }]
+            };
+        }
+
+        const response = await ai.models.generateContent({
+            model,
+            contents,
+            config: {
+                systemInstruction: "You are an expert CBSE Class 10 tutor. Solve the doubt clearly, step-by-step. Use Markdown for formatting (bold, bullet points, math equations). Be encouraging and concise."
+            }
+        });
+
+        return response.text || "I analyzed the input but couldn't generate a solution. Please try asking in a different way.";
+    } catch (error) {
+        console.error("Doubt Solver Error:", error);
+        return "## Error\nSomething went wrong while processing your request. Please try again.";
+    }
+};
+
 export const generateStudyPlan = async (goal: string): Promise<StudyTask[]> => {
   if (!ai) return [];
 
@@ -72,7 +110,7 @@ export const summarizeText = async (text: string): Promise<string> => {
 };
 
 export const generateSimpleNotes = async (subject: string, chapter: string): Promise<string> => {
-  if (!ai) return "## Connection Error\nPlease check your internet connection and API Key.";
+  if (!ai) return "## Connection Error\nPlease check your internet connection.";
 
   try {
     const prompt = `Create detailed, student-friendly revision notes for Class 10 CBSE NCERT Topic: "${chapter}" in Subject: "${subject}".
