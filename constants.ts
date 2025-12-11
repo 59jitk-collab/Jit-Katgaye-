@@ -210,7 +210,8 @@ export const MOCK_ACTIVITIES: Activity[] = [
       'Burn it using a spirit lamp or burner.',
       'Collect the ash formed in a watch glass.'
     ],
-    conclusion: 'Magnesium burns with a dazzling white flame to form a white powder called Magnesium Oxide.'
+    conclusion: 'Magnesium burns with a dazzling white flame to form a white powder called Magnesium Oxide.',
+    visualType: 'CHEMISTRY_BURN'
   },
   {
     id: 'act-2',
@@ -225,7 +226,8 @@ export const MOCK_ACTIVITIES: Activity[] = [
       'Observe the gas bubbles.',
       'Pass the gas through soap solution and bring a burning candle near the bubbles.'
     ],
-    conclusion: 'Hydrogen gas is evolved, which burns with a pop sound.'
+    conclusion: 'Hydrogen gas is evolved, which burns with a pop sound.',
+    visualType: 'CHEMISTRY_BUBBLE'
   },
   {
     id: 'act-3',
@@ -255,6 +257,7 @@ export const MOCK_ACTIVITIES: Activity[] = [
       'Keep the setup in sunlight.',
       'Perform starch test with iodine.'
     ],
-    conclusion: 'The part inside the bottle does not turn blue-black, showing no starch was formed without CO2.'
+    conclusion: 'The part inside the bottle does not turn blue-black, showing no starch was formed without CO2.',
+    visualType: 'BIOLOGY_3D_PLANT'
   }
 ];

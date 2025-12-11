@@ -77,6 +77,7 @@ export interface Activity {
   materials: string[];
   procedure: string[];
   conclusion: string;
+  visualType?: 'CHEMISTRY_BURN' | 'CHEMISTRY_BUBBLE' | 'BIOLOGY_3D_PLANT' | 'PHYSICS_CIRCUIT';
 }
 
 export interface StudyTask {
